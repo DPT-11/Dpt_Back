@@ -37,9 +37,29 @@ class QuestionList(generics.RetrieveAPIView):
         return questions
 
 # 답 등록
-class AnswerCreate(generics.CreateAPIView):
+class AnswerCreate(generics.ListCreateAPIView):
     serializer_class = AnswerSerializer
     permission_classes = [IsAuthenticated]
+    queryset = Answer.objects.all()
+
+        # 사용자 등록 답안만 가져온다
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.filter(user=self.request.user)
+        return qs
+
+# 답 수정, 삭제 가능
+class AnswerDetail(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = AnswerSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Answer.objects.all()
+    lookup_field = 'id'
+
+        # 사용자 등록 답안만 가져온다
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.filter(user=self.request.user)
+        return qs
 
 # 등록한 답 보기
 class AnswerList(generics.ListAPIView):

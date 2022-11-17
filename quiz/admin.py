@@ -5,3 +5,4 @@ from .models import *
 
 admin.site.register(Cookie)
 admin.site.register(Question)
+admin.site.register(Answer)

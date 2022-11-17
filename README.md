@@ -28,23 +28,33 @@
             질문5
         ]
     }
-### 질문에 답변 만들기 http://127.0.0.1:8000/quiz/make/ - POST
+### 질문에 답변 옵션 추가하기 http://127.0.0.1:8000/quiz/make/answer/<str:user> - POST
     {
-        "answer":"정답(필수 입력)",
-        "option1":"오답(필수 입력)",
-        "option2":"오답(필수 입력 아님)",
-        "option3":"오답(필수 입력 아님)",
-        "option4":"오답(필수 입력 아님)",
-        "user":"현재는 user id / user(사용자 token 구현 후 넣어주세요)!",
-        "question":"질문"
+        "answer":"답변",
+        "correct"true or false(정답인경우 true),
+        "user":"현재는 user id",
+        "question":"답변 해당 질문"
     }
-### 질문 답변 전체 목록 http://127.0.0.1:8000/quiz/question/ - GET
+### 질문 답변 옵션 수정 삭제하기 http://127.0.0.1:8000/quiz/make/answer/<str:id>/<str:user> - PUT, DELETE
     {
-        "answer":"정답 입력 값",
-        "option1":"오답 입력 값",
-        "option2":"오답 입력 값 (입력 없을 경우 "")",
-        "option3":"오답 입력 값 (입력 없을 경우 "")",
-        "option4":"오답 입력 값 (입력 없을 경우 "")",
-        "user":"현재는 user id / user(사용자 token 구현 후 넣어주세요)!",
-        "question":"질문"
+        "answer":"답변",
+        "correct"true or false(정답인경우 true),
+        "user":"현재는 user id",
+        "question":"답변 해당 질문"
+    }
+### 질문 옵션 보기 http://127.0.0.1:8000/quiz/make/answer/<str:user> - GET(수정, 삭제 동일)
+    {
+        {
+            "answer":"답변",
+            "correct"true or false(정답인경우 true),
+            "user":"현재는 user id",
+            "question":"답변 해당 질문"
+        }
+        {
+            "answer":"답변",
+            "correct"true or false(정답인경우 true),
+            "user":"현재는 user id",
+            "question":"답변 해당 질문"
+        }
+        ...
     }

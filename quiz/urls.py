@@ -6,6 +6,7 @@ app_name = 'quiz'
 urlpatterns = [
     path('cookie/', CookieChoice.as_view()),
     path('cookie/<str:id>', QuestionList.as_view()), 
-    path('make/', AnswerCreate.as_view()), 
-    path('question/', AnswerList.as_view()), 
+    path('make/answer/<str:user>', AnswerCreate.as_view()),
+    path('make/answer/<str:id>/<str:user>', AnswerDetail.as_view()),
+    path('question/<str:user>', AnswerList.as_view()), 
 ]

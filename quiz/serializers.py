@@ -28,7 +28,21 @@ class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
         fields = '__all__'
-
+        
     def create(self, validated_data):
         data = Answer.objects.create(**validated_data)
         return data
+    #     options = []    
+    #     options.append(data.answer)
+    #     options.append(data.option1)
+    #     if data.option2 != '':
+    #         options.append(data.option2)
+    #     if data.option3 != '':
+    #         options.append(data.option3)
+    #     if data.option4 != '':
+    #         options.append(data.option4)
+    # # list로 답안 저장, options[1] 이 정답
+
+    #     answer_dict = {}
+    #     answer_dict[data.question] = options
+    #     return answer_dict
