@@ -11,15 +11,11 @@ class CookieChoiceSerializer(serializers.ModelSerializer):
         return data
 
 class QuestionSerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = Question
         fields = '__all__'
 
 class CookieSerializer(serializers.ModelSerializer):
-    # def get_cookie(self, obj):
-    #     qs = Question.objects.filter(
-    #         questionId__id=obj.id)
     class Meta:
         model = Cookie
         fields = '__all__'
@@ -46,3 +42,21 @@ class AnswerSerializer(serializers.ModelSerializer):
     #     answer_dict = {}
     #     answer_dict[data.question] = options
     #     return answer_dict
+class GuestSerializer(serializers.ModelSerializer):
+    answers = []
+    class Meta:
+        model = Guest
+        fields = ('nickname','user','answer1','answer2','answer3','answer4','answer5')
+
+    def get_answers(self):
+        lst = self.answers
+        lst.append(self.answer1)
+        lst.append(self.answer2)
+        lst.append(self.answer3)
+        lst.append(self.answer4)
+        lst.append(self.answer5)
+        return lst
+
+    def create(self, validated_data):
+        data = Guest.objects.create(**validated_data)
+        return data

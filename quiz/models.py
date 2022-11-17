@@ -32,4 +32,14 @@ class Maker(models.Model):
 class Guest(models.Model):
     nickname = models.CharField(max_length=30)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    answer1 = models.OneToOneField(Answer, on_delete=models.CASCADE, related_name='answer1')
+    answer2 = models.OneToOneField(Answer, on_delete=models.CASCADE, related_name='answer2')
+    answer3 = models.OneToOneField(Answer, on_delete=models.CASCADE, related_name='answer3')
+    answer4 = models.OneToOneField(Answer, on_delete=models.CASCADE, related_name='answer4')
+    answer5 = models.OneToOneField(Answer, on_delete=models.CASCADE, related_name='answer5')
+    answers = []
     
+    score = models.IntegerField(default=0, null=True, blank=True)
+
+    class Meta:
+        ordering = ['score', 'nickname']
