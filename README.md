@@ -4,6 +4,9 @@
     pip install django
     pip install pillow
     pip install djangorestframework
+    
+    pip install django-extensions
+    pip install pyjwt
 
 ### API
 ### 퀴즈
