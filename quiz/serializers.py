@@ -48,6 +48,9 @@ class NewAnswerSerializer(serializers.ModelSerializer):
         data.save()
         return data
 
+    def get(self, request):
+        data = NewAnswer.objects.get(user=request.user)
+
 class AnswerDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
