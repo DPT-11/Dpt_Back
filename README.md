@@ -143,21 +143,22 @@
 ### GUEST 퀴즈 풀기
 ### http://127.0.0.1:8000/quiz/<str:user(user.name)>/ - POST
     {
-        "nickname":"guest nickname",
-        "user":"user(quiz maker)",
-        "answer1":"1번 문제 option 선택",
-        "answer2":"2번 문제 option 선택",
-        "answer3":"3번 문제 option 선택",
-        "answer4":"4번 문제 option 선택",
-        "answer5":"5번 문제 option 선택"
+        "nickname": "nickname",
+        "user": user(make).id,
+        "answer1": "1번 options",
+        "answer2": "2번 options",
+        "answer3": "3번 options",
+        "answer4": "4번 options",
+        "answer5": "5번 options"
     }
 ### http://127.0.0.1:8000/quiz/<str:user(user.name)>/ - GET
     {
-        "nickname":"guest nickname",
-        "user":"user(quiz maker)",
-        "answer1":"1번 문제 option 선택",
-        "answer2":"2번 문제 option 선택",
-        "answer3":"3번 문제 option 선택",
-        "answer4":"4번 문제 option 선택",
-        "answer5":"5번 문제 option 선택"
+        "nickname": "nickname",
+        "user": user(make).id,
+        "answer1": "1번 options",
+        "answer2": "2번 options",
+        "answer3": "3번 options",
+        "answer4": "4번 options",
+        "answer5": "5번 options",
+        "score":"맞은 개수"
     }
