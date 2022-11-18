@@ -33,10 +33,27 @@ class NewAnswerCreate(generics.ListCreateAPIView):
     queryset = NewAnswer.objects.all()
 
         # 사용자 등록 답안만 가져온다
-    def get_queryset(self):
-        qs = super().get_queryset()
-        qs = qs.filter(user=self.request.user)
-        return qs
+    # def get_queryset(self):
+    #     qs = super().get_queryset()
+    #     qs = qs.filter(user=self.request.user)
+    #     return qs
+
+    def get_answer(self):
+        data = NewAnswer.objects.get()
+        data = data.filter(user=self.request.user)
+        data_dict = {
+            'answer':[data.answer1, data.answer2, data.answer3, data.answer4, data.answer5],
+            'options':[
+                [data.option1_1,data.option1_2,data.option1_3,data.option1_4,data.answer1],
+                [data.option2_1,data.option2_2,data.option2_3,data.option2_4,data.answer2],
+                [data.option3_1,data.option3_2,data.option3_3,data.option3_4,data.answer3],
+                [data.option4_1,data.option4_2,data.option4_3,data.option4_4,data.answer4],
+                [data.option5_1,data.option5_2,data.option5_3,data.option5_4,data.answer5]
+            ],
+            'user': data.user
+        }
+        return Response(data_dict)
+    
 
 # class NewAnswerDeatailList(generics.ListAPIView):
 #     serializer_class = AnswerDetailSerializer
@@ -54,18 +71,3 @@ class GuestCreate(generics.ListCreateAPIView):
         qs = qs.filter(user=self.request.user)
         return qs
 
-    # def quiz(self):
-    #     answerdata = NewAnswer.objects.all()
-    #     self.score = 0
-    #     if self.answer1 == answerdata.answer1:
-    #         self.score += 1
-    #     if self.answer2 == answerdata.answer2:
-    #         self.score += 1
-    #     if self.answer3 == answerdata.answer3:
-    #         self.score += 1
-    #     if self.answer4 == answerdata.answer4:
-    #         self.score += 1
-    #     if self.answer5 == answerdata.answer5:
-    #         self.score += 1
-    #     self.save()
-    #     return self
