@@ -6,7 +6,7 @@
     pip install pyJWT
   
   
-### USER
+### USER 회원가입
 
 ### 회원가입 http://127.0.0.1:8000/users/register
     {
@@ -19,6 +19,8 @@
         "token": "토큰생성"
     }
     
+    
+### USER 로그인
 ### 로그인 http://127.0.0.1:8000/users/login
     {
         "username":"사용자",
