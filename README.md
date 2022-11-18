@@ -1,12 +1,13 @@
 # Dpt_Back
-
+{
   pip install django
   pip install djangorestframework
   pip install django-extensions
   pip install pyJWT
+  }
   
-# USER
-# 회원가입
+### USER
+### 회원가입
   {
       "username":"사용자이름",
       "password":"비밀번호 네자리"
