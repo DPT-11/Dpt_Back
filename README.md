@@ -7,16 +7,30 @@
   
   
 ### USER
-### 회원가입
-  {
-      "username":"사용자이름",
-      "password":"비밀번호 네자리"
-   }
-   
+
+### 회원가입 http://127.0.0.1:8000/users/register
+    {
+        "username":"사용자이름",
+        "password":"비밀번호 네자리"
+    }
+### 결과
+    {
+        "username": "사용자이름",
+        "token": "토큰생성"
+    }
+    
+### 로그인 http://127.0.0.1:8000/users/login
+    {
+        "username":"사용자",
+        "password":"비밀번호 네자리"
+    }
+
 ### 결과
    {
-      "username": "user3",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImV4cCI6MTY3Mzk1NjQ2Nn0.-94IbYfZxVZeZx1_zA7WgCp9-GTdM8PcBS1yNrUFv4g"
-  }
-   
+        "user": {
+            "username": "사용자",
+            "last_login": "2022-00-00 00:00:00.000000+00:00",
+            "token": "토큰"
+    }
+}
    
