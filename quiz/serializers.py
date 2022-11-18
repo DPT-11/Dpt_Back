@@ -1,6 +1,11 @@
 from rest_framework import serializers
 from .models import *
 
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = '__all__'
+
 class CookieChoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Maker
@@ -10,52 +15,49 @@ class CookieChoiceSerializer(serializers.ModelSerializer):
         data = Maker.objects.create(**validated_data)
         return data
 
-class QuestionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Question
-        fields = '__all__'
-
 class CookieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cookie
         fields = '__all__'
 
-class AnswerSerializer(serializers.ModelSerializer):
+class NewAnswerSerializer(serializers.ModelSerializer):
+
     class Meta:
-        model = Answer
-        fields = '__all__'
+        model = NewAnswer
+        fields = ('question1','answer1','option1_1','option1_2','option1_3','option1_4',
+                'question2','answer2','option2_1','option2_2','option2_3','option2_4',
+                'question3','answer3','option3_1','option3_2','option3_3','option3_4',
+                'question4','answer4','option4_1','option4_2','option4_3','option4_4',
+                'question5','answer5','option5_1','option5_2','option5_3','option5_4',
+                'user','answers','options')
+
         
     def create(self, validated_data):
-        data = Answer.objects.create(**validated_data)
-        return data
-    #     options = []    
-    #     options.append(data.answer)
-    #     options.append(data.option1)
-    #     if data.option2 != '':
-    #         options.append(data.option2)
-    #     if data.option3 != '':
-    #         options.append(data.option3)
-    #     if data.option4 != '':
-    #         options.append(data.option4)
-    # # list로 답안 저장, options[1] 이 정답
+        data = NewAnswer.objects.create(**validated_data)
+        data.answers.append(data.answer1)
+        data.answers.append(data.answer2)
+        data.answers.append(data.answer3)
+        data.answers.append(data.answer4)
+        data.answers.append(data.answer5)
 
-    #     answer_dict = {}
-    #     answer_dict[data.question] = options
-    #     return answer_dict
+        data.options.append([data.answer1,data.option1_1,data.option1_2,data.option1_3,data.option1_4])
+        data.options.append([data.answer2,data.option2_1,data.option2_2,data.option2_3,data.option2_4])
+        data.options.append([data.answer3,data.option3_1,data.option3_2,data.option3_3,data.option3_4])
+        data.options.append([data.answer4,data.option4_1,data.option4_2,data.option4_3,data.option4_4])
+        data.options.append([data.answer5,data.option5_1,data.option5_2,data.option5_3,data.option5_4])
+        data.save()
+        return data
+
+class AnswerDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NewAnswer
+        fields = ('answers', 'options', 'user')
+
 class GuestSerializer(serializers.ModelSerializer):
     answers = []
     class Meta:
         model = Guest
         fields = ('nickname','user','answer1','answer2','answer3','answer4','answer5')
-
-    def get_answers(self):
-        lst = self.answers
-        lst.append(self.answer1)
-        lst.append(self.answer2)
-        lst.append(self.answer3)
-        lst.append(self.answer4)
-        lst.append(self.answer5)
-        return lst
 
     def create(self, validated_data):
         data = Guest.objects.create(**validated_data)
