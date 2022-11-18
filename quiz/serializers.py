@@ -24,12 +24,12 @@ class NewAnswerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = NewAnswer
-        fields = ('question1','answer1','option1_1','option1_2','option1_3','option1_4',
+        fields = ('user','answers','options',
+                'question1','answer1','option1_1','option1_2','option1_3','option1_4',
                 'question2','answer2','option2_1','option2_2','option2_3','option2_4',
                 'question3','answer3','option3_1','option3_2','option3_3','option3_4',
                 'question4','answer4','option4_1','option4_2','option4_3','option4_4',
-                'question5','answer5','option5_1','option5_2','option5_3','option5_4',
-                'user','answers','options')
+                'question5','answer5','option5_1','option5_2','option5_3','option5_4')
 
         
     def create(self, validated_data):
@@ -49,16 +49,44 @@ class NewAnswerSerializer(serializers.ModelSerializer):
         return data
 
 class AnswerDetailSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = NewAnswer
         fields = ('answers', 'options', 'user')
 
 class GuestSerializer(serializers.ModelSerializer):
     answers = []
+    score = 0
     class Meta:
         model = Guest
-        fields = ('nickname','user','answer1','answer2','answer3','answer4','answer5')
+        fields = ('nickname','user','answer1','answer2','answer3','answer4','answer5','score')
 
     def create(self, validated_data):
         data = Guest.objects.create(**validated_data)
+        data.score = 0
+        answer = NewAnswer.objects.get(user=data.user)
+        if data.answer1 == answer.answer1:
+            data.score += 1
+        if data.answer2 == answer.answer2:
+            data.score += 1
+        if data.answer3 == answer.answer3:
+            data.score += 1
+        if data.answer4 == answer.answer4:
+            data.score += 1
+        if data.answer5 == answer.answer5:
+            data.score += 1
+        # answerdata = NewAnswer.objects.filter()
+        # data.score = 2
+        # if data.answer1 == answerdata.answer1:
+        #     data.score += 1
+        # if data.answer2 == answerdata.answer2:
+        #     data.score += 1
+        # if data.answer3 == answerdata.answer3:
+        #     data.score += 1
+        # if data.answer4 == answerdata.answer4:
+        #     data.score += 1
+        # if data.answer5 == answerdata.answer5:
+        #     data.score += 1
+
+        # data.save()
         return data

@@ -89,11 +89,11 @@ class Maker(models.Model):
 class Guest(models.Model):
     nickname = models.CharField(max_length=30)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    answer1 = models.OneToOneField(NewAnswer, on_delete=models.CASCADE, related_name='guestanswer1')
-    answer2 = models.OneToOneField(NewAnswer, on_delete=models.CASCADE, related_name='guestanswer2')
-    answer3 = models.OneToOneField(NewAnswer, on_delete=models.CASCADE, related_name='guestanswer3')
-    answer4 = models.OneToOneField(NewAnswer, on_delete=models.CASCADE, related_name='guestanswer4')
-    answer5 = models.OneToOneField(NewAnswer, on_delete=models.CASCADE, related_name='guestanswer5')
+    answer1 = models.CharField(max_length=20)
+    answer2 = models.CharField(max_length=20)
+    answer3 = models.CharField(max_length=20)
+    answer4 = models.CharField(max_length=20)
+    answer5 = models.CharField(max_length=20)
     answers = []
     
     score = models.IntegerField(default=0, null=True, blank=True)

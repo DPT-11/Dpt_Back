@@ -5,6 +5,7 @@ from .serializers import *
 from django.views import View
 from django.http import Http404, HttpResponse
 from rest_framework import generics, status, views
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.core import serializers
@@ -37,19 +38,10 @@ class NewAnswerCreate(generics.ListCreateAPIView):
         qs = qs.filter(user=self.request.user)
         return qs
 
-# 등록한 답 보기
-class AnswerList(generics.ListAPIView):
-    serializer_class = NewAnswerSerializer
-    permission_classes = [IsAuthenticated]
-    queryset = NewAnswer.objects.all()
+# class NewAnswerDeatailList(generics.ListAPIView):
+#     serializer_class = AnswerDetailSerializer
+#     permission_classes = [is]
 
-    # 사용자 등록 답안만 가져온다
-    def get_queryset(self):
-        qs = super().get_queryset()
-        qs = qs.filter(user=self.request.user)
-        return qs
-
-    # -> options = [] 넣을 예정
 
 class GuestCreate(generics.ListCreateAPIView):
     serializer_class = GuestSerializer
@@ -61,3 +53,19 @@ class GuestCreate(generics.ListCreateAPIView):
         qs = super().get_queryset()
         qs = qs.filter(user=self.request.user)
         return qs
+
+    # def quiz(self):
+    #     answerdata = NewAnswer.objects.all()
+    #     self.score = 0
+    #     if self.answer1 == answerdata.answer1:
+    #         self.score += 1
+    #     if self.answer2 == answerdata.answer2:
+    #         self.score += 1
+    #     if self.answer3 == answerdata.answer3:
+    #         self.score += 1
+    #     if self.answer4 == answerdata.answer4:
+    #         self.score += 1
+    #     if self.answer5 == answerdata.answer5:
+    #         self.score += 1
+    #     self.save()
+    #     return self
