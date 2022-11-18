@@ -1,10 +1,10 @@
 # Dpt_Back
-{
-  pip install django
-  pip install djangorestframework
-  pip install django-extensions
-  pip install pyJWT
-  }
+
+    pip install django
+    pip install djangorestframework
+    pip install django-extensions
+    pip install pyJWT
+  
   
 ### USER
 ### 회원가입
